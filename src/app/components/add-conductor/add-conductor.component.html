@@ -1,0 +1,30 @@
+<form #myForm="ngForm">
+	<div class="container" *ngIf="!submitted">
+		<div class="col text-center">
+			<h1>{{titulo}}</h1>
+		</div>
+		<div class="form-group col-md-3">
+			<label for="id">Id</label>
+			<input type="number" name="id" id="id" placeholder="Id" class="form-control"
+				(focusout)="existsPk(conductor.id)" [(ngModel)]="conductor.id">
+		</div>
+		<div class="form-group col-md-3">
+			<label for="nombre">Nombre</label>
+			<input type="text" name="nombre" id="nombre" placeholder="Nombre" class="form-control"
+				[(ngModel)]="conductor.nombre">
+		</div>
+		<div class="form-group col-md-3">
+			<label for="fecha_ingreso">Fecha de ingreso</label>
+			<input type="date" min="1900-01-01" max="2030-12-31" name="fecha_ingreso" id="fecha_ingreso"
+				placeholder="Fecha de ingreso" class="form-control"
+				[(ngModel)]="conductor.fecha_ingreso">
+		</div>
+		<button class=" btn btn-outline-info" (click)="saveConductor()" [disabled]="exist">Agregar
+			conductor</button>
+	</div>
+	<div class="text-center" *ngIf="submitted">
+		<h4 style="margin: auto;">You submitted successfully!</h4>
+		<button style="margin: auto;" class="btn btn-success" (click)="newConductor()">Add</button>
+	</div>
+	{{msgError}}
+</form>

@@ -1,0 +1,89 @@
+<form #myForm="ngForm">
+	<div class="container">
+		<h1 class="text-center">Lista de rutas</h1>
+		<div class="row">
+			<div class="col">
+				<table class="table table-striped table-hover">
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Id</th>
+							<th scope="col">Numbero de bus</th>
+							<th scope="col">Fecha y hora</th>
+							<th scope="col">Cantidad de sillas</th>
+							<th scope="col">Identificador de conductor</th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody *ngFor="let ruta of rutasSet; let i=index">
+						<tr>
+							<th class="indice" scope="row">{{i+1}}</th>
+							<td>{{ruta.id}}</td>
+							<td>{{ruta.numero_bus}}</td>
+							<td>{{ruta.fecha_hora | date:'mediumDate':'+0530'}}</td>
+							<td>{{ruta.cantidad_sillas}}</td>
+							<td>{{ruta.conductor.nombre}}</td>
+							<td><a (click)="triggerModal(modalData,ruta)"><i
+										class="bi bi-pencil-square"></i></a>
+							</td>
+							<td><a (click)="deleteRuta(ruta.id)" (click)="enviarSMS()"><i
+										class="bi bi-trash"></i></a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<ng-template #modalData let-modal>
+		<div class="modal-header">
+			<h4 class="modal-title" id="modal-basic-title">Editar Ruta</h4>
+			<button type="button" class="close btn btn-dark" aria-label="Close"
+				(click)="modal.dismiss('Cross click')">
+				<span aria-hidden="true"><i class="bi bi-x"></i></span>
+			</button>
+		</div>
+		<div class="modal-body">
+			<div style="width: 400px; margin: auto;">
+				<div class="submit-form">
+					<div class="form-group">
+						<label for="id">Id</label>
+						<input disabled type="number" class="form-control" id="id" required
+							[(ngModel)]="currentRuta.id" name="id">
+					</div>
+					<div class="form-group">
+						<label for="numero_bus">Numero bus</label>
+						<input type="number" name="numero_bus" id="numero_bus"
+							class="form-control" required
+							[(ngModel)]="currentRuta.numero_bus">
+					</div>
+					<div class="form-group">
+						<label for="fecha_hora">Fecha y hora</label>
+						<input type="date" min="1900-01-01" max="2030-12-31" name="fecha_hora"
+							id="fecha_hora" class="form-control" required
+							[(ngModel)]="currentRuta.fecha_hora">
+					</div>
+					<div class="form-group">
+						<label for="cantidad_sillas">Cantidad de sillas</label>
+						<input type="number" name="cantidad_sillas" id="cantidad_sillas"
+							class="form-control" required
+							[(ngModel)]="currentRuta.cantidad_sillas">
+					</div>
+					<div class="form-group">
+						<label for="conductores">Conductores</label>
+						<ng-select class="form-select" bindLabel="nombre"
+							[items]="conductoresSet" [(ngModel)]="currentRuta.conductor"
+							name="conductores">
+						</ng-select>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-success" (click)="updateRuta()"
+				(click)="modal.close('Save click')">Save</button>
+		</div>
+	</ng-template>
+</form>

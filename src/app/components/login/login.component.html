@@ -1,0 +1,26 @@
+<div class="container-fluid">
+	<div class="container text-center">
+		<form class="d-flex flex-column justify-content-evenly align-items-center" #miFormulario="ngForm"
+			(ngSubmit)="login(miFormulario)">
+			<i class="bi bi-person-circle"></i>
+			<h1>Sign in</h1>
+			<div class="mb-3 row">
+				<label for="staticEmail" class="col-sm-2 col-form-label"><i
+						class="bi bi-person-fill"></i></label>
+				<div class="col-sm-10">
+					<input type="email" class="form-control" placeholder="User" autocomplete="off"
+						name="email" ngModel>
+				</div>
+			</div>
+			<div class="mb-3 row">
+				<label for="inputPassword" class="col-sm-2 col-form-label"><i
+						class="bi bi-key-fill"></i></label>
+				<div class="col-sm-10">
+					<input type="password" class="form-control" id="inputPassword"
+						autocomplete="off" placeholder="Password" name="password" ngModel>
+				</div>
+			</div>
+			<button type="submit" class="btn btn-light border border-info rounded-pill">Login</button>
+		</form>
+	</div>
+</div>
